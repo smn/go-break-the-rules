@@ -170,5 +170,8 @@ describe('break the rules app', function() {
         };
         tester.check_state(user, 'de Haan', 'end',
             '^Thanks!');
+        var contact = app.api._dummy_contacts['contact-key'];
+        assert.equal(contact.name, 'Simon');
+        assert.equal(contact.surname, 'de Haan');
     });
 });
