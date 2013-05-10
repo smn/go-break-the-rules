@@ -48,7 +48,7 @@ describe('break the rules app', function() {
                 '2. Python[^]' +
                 '3. C[^]' +
                 '4. PHP[^]' +
-                '5. C\#$'
+                '5. C\\#$'
             )
         });
     });
