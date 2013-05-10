@@ -148,30 +148,98 @@ describe('break the rules app', function() {
 
     tester = new CustomTester();
 
-    it('should ask for my name', function() {
-        tester.check_state(null, null, 'ask_name',
-            '^Hey! What\'s your first name?');
+    it('should intro the Praekelt Foundation & ask for my name', function() {
+        tester.check_state(null, null, 'name',
+            '^Hey! We\'re the Praekelt Foundation. ' +
+            'we develop Open Source software to improve lives of ' +
+            'people living in poverty. ' +
+            'What\'s your first name?');
     });
 
     it('should ask for my surname', function() {
         var user = {
             current_state: 'ask_name'
         };
-        tester.check_state(user, 'Simon', 'ask_surname',
-            '^Thanks! What is your surname?');
+        tester.check_state(user, 'Simon', 'programming_language',
+            '^Thanks! We\'re looking for an intern. ' +
+            'Which programming language do you prefer? [^]' +
+            '1. Java[^]' +
+            '2. Python[^]' +
+            '3. C/C++[^]' +
+            '4. PHP[^]' +
+            '5. C#$');
+    });
+
+    it('should ask for framework background', function() {
+        var user = {
+            current_state: 'programming_language',
+            answers: {
+                name: 'Simon'
+            }
+        };
+        tester.check_state(user, '2', 'framework',
+            '^Do you have experience with any of the following?[^]' +
+            '1. Twisted[^]' +
+            '2. Django[^]' +
+            '3. Node.js$'
+        );
+    });
+
+    it('should ask for tool familiarity', function() {
+        var user = {
+            current_state: 'framework',
+            answers: {
+                name: 'Simon',
+                programming_language: 'python'
+            }
+        };
+        tester.check_state(user, '1', 'ask_github',
+            '^Do you have a GitHub account?[^]' +
+            '1. Yes and I\'m happy to tell you[^]' +
+            '2. No.$');
+    });
+
+    it('should ask for my GitHub account', function() {
+        var user = {
+            current_state: 'ask_github',
+            answers: {
+                name: 'Simon',
+                programming_language: 'python',
+                framework: 'twisted'
+            }
+        };
+        tester.check_state(user, '1', 'github',
+            '^Sweet! What\'s your GitHub account?$');
+    });
+
+    it('should skip to the end if not wanting to provide GitHub acct', function() {
+        var user = {
+            current_state: 'ask_github',
+            answers: {
+                name: 'Simon',
+                programming_language: 'python',
+                framework: 'twisted'
+            }
+        };
+        tester.check_state(user, '2', 'end',
+            '^Thanks!');
     });
 
     it('should thank me and store the contact', function() {
         var user = {
-            current_state: 'ask_surname',
+            current_state: 'github',
             answers: {
-                ask_name: 'Simon'
+                name: 'Simon',
+                programming_language: 'python',
+                framework: 'twisted'
             }
         };
-        tester.check_state(user, 'de Haan', 'end',
+        tester.check_state(user, 'smn', 'end',
             '^Thanks!');
         var contact = app.api._dummy_contacts['contact-key'];
         assert.equal(contact.name, 'Simon');
-        assert.equal(contact.surname, 'de Haan');
+        assert.equal(contact.programming_language, 'python');
+        assert.equal(contact.framework, 'twisted');
+        assert.equal(contact.github, 'smn');
     });
 });
