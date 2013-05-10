@@ -2,7 +2,7 @@
   "name": "go-break-the-rules",
   "version": "0.0.1",
   "description": "A Vumi Go USSD application the #breaktherules day.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "test": "test"
   },
