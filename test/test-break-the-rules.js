@@ -151,21 +151,21 @@ describe('break the rules app', function() {
     it('should intro the Praekelt Foundation & ask for my name', function() {
         tester.check_state(null, null, 'name',
             '^Hey! We\'re the Praekelt Foundation. ' +
-            'we develop Open Source software to improve lives of ' +
+            'We develop Open Source software to improve lives of ' +
             'people living in poverty. ' +
-            'What\'s your first name?');
+            'What\'s your name\\?');
     });
 
-    it('should ask for my surname', function() {
+    it('should ask for my programming language preference', function() {
         var user = {
-            current_state: 'ask_name'
+            current_state: 'name'
         };
         tester.check_state(user, 'Simon', 'programming_language',
             '^Thanks! We\'re looking for an intern. ' +
-            'Which programming language do you prefer? [^]' +
+            'Which programming language do you prefer\\?[^]' +
             '1. Java[^]' +
             '2. Python[^]' +
-            '3. C/C++[^]' +
+            '3. C[^]' +
             '4. PHP[^]' +
             '5. C#$');
     });
@@ -178,10 +178,11 @@ describe('break the rules app', function() {
             }
         };
         tester.check_state(user, '2', 'framework',
-            '^Do you have experience with any of the following?[^]' +
-            '1. Twisted[^]' +
-            '2. Django[^]' +
-            '3. Node.js$'
+            '^Which of the following do you have experience with\\?[^]' +
+            '1. Django[^]' +
+            '2. Twisted[^]' +
+            '3. Node.js[^]' +
+            '4. None of the above$'
         );
     });
 
@@ -194,8 +195,8 @@ describe('break the rules app', function() {
             }
         };
         tester.check_state(user, '1', 'ask_github',
-            '^Do you have a GitHub account?[^]' +
-            '1. Yes and I\'m happy to tell you[^]' +
+            '^Do you have a GitHub account\\?[^]' +
+            '1. Yes and I\'m happy to tell you.[^]' +
             '2. No.$');
     });
 
@@ -209,7 +210,7 @@ describe('break the rules app', function() {
             }
         };
         tester.check_state(user, '1', 'github',
-            '^Sweet! What\'s your GitHub account?$');
+            '^Sweet! What\'s your GitHub account\\?$');
     });
 
     it('should skip to the end if not wanting to provide GitHub acct', function() {
