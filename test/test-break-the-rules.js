@@ -141,7 +141,8 @@ describe('break the rules app', function() {
             user: user,
             content: 'smn',
             next_state: 'end',
-            response: '^Thanks!'
+            response: '^Thanks!',
+            continue_session: false
         });
         var contact = app.api._dummy_contacts['contact-key'];
         assert.equal(contact.name, 'Simon');
