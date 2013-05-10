@@ -152,7 +152,7 @@ describe('break the rules app', function() {
         tester.check_state(null, null, 'name',
             '^Hey! We\'re the Praekelt Foundation. ' +
             'We develop Open Source software to improve lives of ' +
-            'people living in poverty. ' +
+            'people living in poverty.[^]' +
             'What\'s your name\\?');
     });
 
