@@ -239,8 +239,8 @@ describe('break the rules app', function() {
             '^Thanks!');
         var contact = app.api._dummy_contacts['contact-key'];
         assert.equal(contact.name, 'Simon');
-        assert.equal(contact.programming_language, 'python');
-        assert.equal(contact.framework, 'twisted');
-        assert.equal(contact.github, 'smn');
+        assert.equal(contact.extras.github, 'smn');
+        assert.equal(contact.extras.programming_language, 'python');
+        assert.equal(contact.extras.framework, 'twisted');
     });
 });
