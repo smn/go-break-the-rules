@@ -42,13 +42,13 @@ describe('break the rules app', function() {
             content: 'Simon',
             next_state: 'programming_language',
             response: (
-                '^Thanks! We\'re looking for an intern\. ' +
+                '^Thanks! We\'re looking for an intern. ' +
                 'Which programming language do you prefer\\?[^]' +
-                '1\. Java[^]' +
-                '2\. Python[^]' +
-                '3\. C[^]' +
-                '4\. PHP[^]' +
-                '5\. C\#$'
+                '1. Java[^]' +
+                '2. Python[^]' +
+                '3. C[^]' +
+                '4. PHP[^]' +
+                '5. C\#$'
             )
         });
     });
@@ -88,8 +88,8 @@ describe('break the rules app', function() {
             next_state: 'ask_github',
             response: (
                 '^Do you have a GitHub account\\?[^]' +
-                '1. Yes and I\'m happy to tell you\.[^]' +
-                '2. No\.$'
+                '1. Yes and I\'m happy to tell you.[^]' +
+                '2. No.$'
             )
         });
     });
