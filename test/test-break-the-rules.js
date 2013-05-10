@@ -23,32 +23,32 @@ describe('break the rules app', function() {
         tester.check_state({
             user: null,
             content: null,
-            next_state: 'ask_name',
+            next_state: 'name',
             response: (
                 '^Hey! We\'re the Praekelt Foundation. ' +
-                'we develop Open Source software to improve lives of ' +
-                'people living in poverty. ' +
-                'What\'s your first name?'
+                'We develop Open Source software to improve lives of ' +
+                'people living in poverty.[^]' +
+                'What\'s your name?'
             )
         });
     });
 
-    it('should ask for my surname', function() {
+    it('should ask for my programming language preference', function() {
         var user = {
-            current_state: 'ask_name'
+            current_state: 'name'
         };
         tester.check_state({
             user: user,
             content: 'Simon',
             next_state: 'programming_language',
             response: (
-                '^Thanks! We\'re looking for an intern. ' +
-                'Which programming language do you prefer? [^]' +
-                '1. Java[^]' +
-                '2. Python[^]' +
-                '3. C/C++[^]' +
-                '4. PHP[^]' +
-                '5. C#$'
+                '^Thanks! We\'re looking for an intern\. ' +
+                'Which programming language do you prefer\\?[^]' +
+                '1\. Java[^]' +
+                '2\. Python[^]' +
+                '3\. C[^]' +
+                '4\. PHP[^]' +
+                '5\. C\#$'
             )
         });
     });
@@ -65,10 +65,11 @@ describe('break the rules app', function() {
             content: '2',
             next_state: 'framework',
             response: (
-                '^Do you have experience with any of the following?[^]' +
-                '1. Twisted[^]' +
-                '2. Django[^]' +
-                '3. Node.js$'
+                '^Which of the following do you have experience with\\?[^]' +
+                '1. Django[^]' +
+                '2. Twisted[^]' +
+                '3. Node.js[^]' +
+                '4. None of the above$'
             )
         });
     });
@@ -86,7 +87,7 @@ describe('break the rules app', function() {
             content: '1',
             next_state: 'ask_github',
             reponse: (
-                '^Do you have a GitHub account?[^]' +
+                '^Do you have a GitHub account\\?[^]' +
                 '1. Yes and I\'m happy to tell you[^]' +
                 '2. No.$'
             )
@@ -106,7 +107,7 @@ describe('break the rules app', function() {
             user: user,
             content: '1',
             next_state: 'github',
-            response: '^Sweet! What\'s your GitHub account?$'
+            response: '^Sweet! What\'s your GitHub account\\?$'
         });
     });
 
