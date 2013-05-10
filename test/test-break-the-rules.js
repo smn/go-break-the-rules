@@ -86,10 +86,10 @@ describe('break the rules app', function() {
             user: user,
             content: '1',
             next_state: 'ask_github',
-            reponse: (
+            response: (
                 '^Do you have a GitHub account\\?[^]' +
-                '1. Yes and I\'m happy to tell you[^]' +
-                '2. No.$'
+                '1. Yes and I\'m happy to tell you\.[^]' +
+                '2. No\.$'
             )
         });
     });
