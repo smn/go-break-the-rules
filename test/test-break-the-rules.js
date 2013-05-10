@@ -124,7 +124,8 @@ describe('break the rules app', function() {
             user: user,
             content: '2',
             next_state: 'end',
-            response: '^Thanks!'
+            response: '^Thanks!',
+            continue_session: false
         });
     });
 
