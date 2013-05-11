@@ -17,7 +17,11 @@ describe("test_api", function() {
 
 describe('break the rules app', function() {
 
-    tester = new vumigo.test_utils.ImTester(app.api);
+    tester = new vumigo.test_utils.ImTester(app.api, {
+        custom_setup: function(api) {
+            api.config_store.sms_tag = ['pool', 'tag'];
+        }
+    });
 
     it('should intro the Praekelt Foundation & ask for my name', function() {
         tester.check_state({
@@ -150,5 +154,6 @@ describe('break the rules app', function() {
         assert.equal(contact.extras.github, 'smn');
         assert.equal(contact.extras.programming_language, 'python');
         assert.equal(contact.extras.framework, 'twisted');
+        console.log(app.api.outbound_sends);
     });
 });
